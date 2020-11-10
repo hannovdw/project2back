@@ -103,7 +103,7 @@ var upload = multer({ storage: storage }).single('file');
 app.get('/api/getdata',(req,res)=>{
 
     const meta = new MetaData({
-        empid: 'WadePrinloo1995',
+        empid: 'PietPrinloo1995',
         doctype: 'Excell Document',
         id: true,
         email: true,
