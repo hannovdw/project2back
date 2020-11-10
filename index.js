@@ -19,7 +19,7 @@ app.use(compression());
 //FILE TYPE CLASSIFICATION........................
 function fileType(){
     let namedir = "public";
-    let fileext = "";
+    let fileext = "none";
     let files = fs.readdirSync(namedir);
     filename = files[0];
     fileext = files[0].split('.').pop();
