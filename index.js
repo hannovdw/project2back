@@ -3,10 +3,12 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 var multer = require('multer');
-const fs = require('fs');
-var filename;
 const helmet = require('helmet');
 const compression = require('compression');
+
+const fs = require('fs');
+var filename;
+var filetype = "";
 
 //MIDDLEWARE.......................
 app.use(express.json());
@@ -23,6 +25,7 @@ function fileType(){
     let files = fs.readdirSync(namedir);
     filename = files[0];
     fileext = files[0].split('.').pop();
+    filetype = fileext;
     return fileext;
 };
 //FILE TYPE CLASSIFICATION........................
@@ -40,17 +43,33 @@ function deleteFile(){
 function classify(){
     var phone = false;
     var id = false;
+    var atcont = false;
+    var point = false;
     var email = false;
     var carreg = false;
-    const phonenumdata = [+2,01,02,03,04,05,06,07,08,09];
-
+    var empid = contarr[0];
+    const phonenumdata = [082,010,014,021,027,042,054,060,061,071,073,076,081,082,083];
+    const carregdata = ['NW','CN','CY', 'GP'];
     for(index=0; index<contarr.length; index++){
         let contents = contarr[index];
-
+        let lengthofcont = contents.length;
+        //email
+        for(count2=0; count2<phonenumdata.length; count2++){
+        if(contents[count2]== '@') atcont = true;
+        if(contents[count2]=='.') point = true;
+        }
+        if(point && atcont) email = true;
+        // car reg
+        for(count=0; count<carregdata.length; count++)
+        if(contents[lengthofcont-3]+contents[lengthofcont-2] == carregdata[count]) carreg = true;
+        // id nr
+        console.log(contents.length);
+        if(contents[0]+contents[1]>40 && contents[0]+contents[1]<99 && contents[2]+contents[3]>0 && contents[2]+contents[3]<13 && contents[4]+contents[5]>0  && contents[4]+contents[5]<32 && contents.length == 14) id = true;
+        //phone nr 
         for(count=0; count<phonenumdata.length; count++)
-        if(contents[0]+contents[1] == phonenumdata[count]) phone = true;
-        
-        classjson = {"phone":phone, "id":id, "email": email, "carreg":carreg};
+        if(contents[0]+contents[1]+contents[2] == phonenumdata[count] && contents.length == 11) phone = true;
+
+        classjson = {"phone":phone, "id":id, "email": email, "carreg":carreg, "empid":empid, "filetype": filetype};
     }
 };
 //CLASSIFY CONTARR DATA.............................
@@ -137,7 +156,7 @@ app.post('/api/postfile',function(req, res) {
             txtParser();
             console.log(contarr[0]);
             deleteFile();
-            classify()
+            classify();
         }
     }
     res.send(classjson);
