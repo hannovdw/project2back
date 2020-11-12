@@ -49,23 +49,24 @@ function classify(){
     var carreg = false;
     var empid = contarr[0];
     const phonenumdata = [082,010,014,021,027,042,054,060,061,071,073,076,081,082,083];
-    const carregdata = ['NW','CN','CY', 'GP'];
+    const carregdata = ['NW','GP','EC','CF'];
+
     for(index=0; index<contarr.length; index++){
         let contents = contarr[index];
-        let lengthofcont = contents.length;
-        //email
+        let contlen = contents.length;
+        //carreg
+        for(count=0; count<carregdata.length; count++)
+        if(contents[contlen-3]+contents[contlen-2] == carregdata[count]) carreg = true;
+        //mail
         for(count2=0; count2<phonenumdata.length; count2++){
         if(contents[count2]== '@') atcont = true;
         if(contents[count2]=='.') point = true;
         }
         if(point && atcont) email = true;
-        // car reg
-        for(count=0; count<carregdata.length; count++)
-        if(contents[lengthofcont-3]+contents[lengthofcont-2] == carregdata[count]) carreg = true;
-        // id nr
+        //id
         console.log(contents.length);
         if(contents[0]+contents[1]>40 && contents[0]+contents[1]<99 && contents[2]+contents[3]>0 && contents[2]+contents[3]<13 && contents[4]+contents[5]>0  && contents[4]+contents[5]<32 && contents.length == 14) id = true;
-        //phone nr 
+        //phone
         for(count=0; count<phonenumdata.length; count++)
         if(contents[0]+contents[1]+contents[2] == phonenumdata[count] && contents.length == 11) phone = true;
 
@@ -139,7 +140,7 @@ app.get('/api/getdata',(req,res)=>{
 
 //POST REQUEST.........................
 app.post('/api/postfile',function(req, res) {
-     
+
     upload(req, res, function (err) {
            if (err instanceof multer.MulterError) {
                return res.status(500).json(err)
@@ -148,7 +149,7 @@ app.post('/api/postfile',function(req, res) {
            }
     })
     
-    setTimeout(myFunction, 1000)
+    setTimeout(myFunction, 1000);
 
     function myFunction(){
         let type = fileType();
