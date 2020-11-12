@@ -135,10 +135,26 @@ app.get('/api/getdata',(req,res)=>{
 });
 //GET REQUEST...........................
 
+//STORE DATA POST ...........................
+app.post('/api/storedata',function(req, res){
+    console.log(req.body);
+    const meta = new MetaData({
+        empid: req.body.empid,
+        doctype: req.body.filetype,
+        id: req.body.id,
+        email: req.body.email,
+        telnr: req.body.phone,
+        carreg: req.body.carreg
+    });
+    meta.save();
+    res.send('Record stored successfully');
+});
+//STORE DATA POST ...........................
 
 
 
-//POST REQUEST.........................
+
+//POST FILE REQUEST.........................
 app.post('/api/postfile',function(req, res) {
 
     upload(req, res, function (err) {
