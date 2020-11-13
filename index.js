@@ -99,7 +99,7 @@ function classifyExcel(){
         console.log(contarr[2].length);
         //carreg
         for(count=0; count<carregdata.length; count++)
-        if(contents[contlen-3]+contents[contlen-2] == carregdata[count]) carreg = true;
+        if(contents[contlen-2]+contents[contlen-1] == carregdata[count]) carreg = true;
         //mail
         for(count2=0; count2<phonenumdata.length; count2++){
         if(contents[count2]== '@') atcont = true;
