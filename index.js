@@ -129,6 +129,16 @@ fs.readFile(directory,'utf8', function(error, data){
 };
 //TEXT FILE PARSE INTO CONTARR VARIABLE......................
 
+//CSV File PARSER........................................
+function csvParser(){
+    let directory = `public/${filename}`;
+    fs.readFile(directory,'utf8', function(error, data){
+        contarr = data.split(';');
+    });
+    };
+//CSV File PARSER........................................
+
+
 
 //EXCEL PARSER .....................................
 function excellParser(){
@@ -211,7 +221,6 @@ app.post('/api/storedata',function(req, res){
 
 //POST FILE REQUEST.........................
 app.post('/api/postfile',function(req, res) {
-
     upload(req, res, function (err) {
            if (err instanceof multer.MulterError) {
                return res.status(500).json(err)
@@ -227,14 +236,17 @@ app.post('/api/postfile',function(req, res) {
         if(type == 'txt'){
             txtParser();
             console.log(contarr[0]);
-            deleteFile();
             classify();
         }
         if(type == 'xlsx'){
             excellParser();
-            deleteFile();
             classifyExcel();
         }
+        if(type == 'csv'){
+            csvParser();
+            classifyExcel();
+        }
+        deleteFile();
     }
     res.send(classjson);
 });
