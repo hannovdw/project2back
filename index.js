@@ -118,12 +118,6 @@ function classifyExcel(){
 //CLASSIFY EXCEL DOCUMENT....................................
 
 
-
-
-
-
-
-
 var contarr = [];
 var classjson = {};
 //TEXT FILE PARSE INTO CONTARR VARIABLE......................
@@ -213,8 +207,6 @@ app.post('/api/storedata',function(req, res){
     res.send('Record stored successfully');
 });
 //STORE DATA POST ...........................
-
-
 
 
 //POST FILE REQUEST.........................
