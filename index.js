@@ -214,8 +214,8 @@ app.post('/api/storedata',function(req, res){
         carreg: req.body.carreg
     });
     meta.save();
-    res.send('Record stored successfully');
-    return;
+    return res.send('Record stored successfully');
+    
 });
 //STORE DATA POST ...........................
 
@@ -249,8 +249,8 @@ app.post('/api/postfile',function(req, res) {
         }
         deleteFile();
     }
-    res.send(classjson);
-    return;
+    return res.send(classjson);
+    
 });
 //POST REQUEST.........................
 
