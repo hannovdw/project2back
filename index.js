@@ -215,6 +215,7 @@ app.post('/api/storedata',function(req, res){
     });
     meta.save();
     res.send('Record stored successfully');
+    return;
 });
 //STORE DATA POST ...........................
 
@@ -249,6 +250,7 @@ app.post('/api/postfile',function(req, res) {
         deleteFile();
     }
     res.send(classjson);
+    return;
 });
 //POST REQUEST.........................
 
