@@ -198,7 +198,7 @@ app.get('/api/getdata',(req,res)=>{
         carreg: false
             });
     meta.save();
-    res.send(meta);
+    return res.send(meta);
 });
 //GET REQUEST...........................
 
