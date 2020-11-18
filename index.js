@@ -223,7 +223,11 @@ app.post('/api/storedata',function(req, res){
 //POST FILE REQUEST.........................
 app.post('/api/postfile',function(req, res) {
     upload(req, res, function (err) {
-        console.log('error');
+           if (err instanceof multer.MulterError) {
+               console.log('error');
+           } else if (err) {
+            console.log('error');
+        }
     })
     
     setTimeout(myFunction, 1000);
