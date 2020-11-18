@@ -222,33 +222,7 @@ app.post('/api/storedata',function(req, res){
 
 //POST FILE REQUEST.........................
 app.post('/api/postfile',function(req, res) {
-    upload(req, res, function (err) {
-           if (err instanceof multer.MulterError) {
-               return res.status(500).json(err)
-           } else if (err) {
-               return res.status(500).json(err)
-           }
-    })
-    
-    setTimeout(myFunction, 1000);
 
-    function myFunction(){
-        let type = fileType();
-        if(type == 'txt'){
-            txtParser();
-            console.log(contarr[0]);
-            classify();
-        }
-        if(type == 'xlsx'){
-            excellParser();
-            classifyExcel();
-        }
-        if(type == 'csv'){
-            csvParser();
-            classifyExcel();
-        }
-        deleteFile();
-    }
     return res.send(classjson);
     
 });
