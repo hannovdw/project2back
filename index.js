@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const readXlsxFile = require('read-excel-file/node');
 
-const fs = require('fs');
+const fs = require('file-system');
 var filename;
 var filetype = "";
 
