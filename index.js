@@ -224,9 +224,9 @@ app.post('/api/storedata',function(req, res){
 app.post('/api/postfile',function(req, res) {
     upload(req, res, function (err) {
            if (err instanceof multer.MulterError) {
-               return json(err);
+               return res.status(500);
            } else if (err) {
-               return json(err);
+               return res.status(500);
            }
     })
     
